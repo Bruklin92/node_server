@@ -3,21 +3,10 @@ require('dotenv').config()
 const express = require('express');
 const app = express();
 
-app.get('/products/get-products', (req, res) => {
-    res.send("Hello world");
-})
+const router = require('./routes/api/v1/index')
 
-app.post('/products/add-products', (req, res) => {
-    res.send("add-products");
-})
-
-app.put('/products/update-products', (req, res) => {
-    res.send("update-products");
-})
-
-app.delete('/products/delete-products', (req, res) => {
-    res.send("delete-products");
-})
+// http:localhost:6000
+app.use('/api/v1', router);
 
 app.listen(process.env.PORT,() => {
     console.log(`Server started at ${process.env.PORT}`);
