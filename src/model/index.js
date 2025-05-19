@@ -1,0 +1,1 @@
+module.exports.Categories = require("./categories.model");
