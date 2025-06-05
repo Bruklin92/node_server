@@ -1,21 +1,29 @@
-
 const express = require('express');
+const { productsController } = require('../../../controller');
 const router = express.Router();
 
-router.get('/list-products', (req, res) => {
-    res.send("Hello world");    
-})
+router.get(
+    '/list-products',
+    productsController.listproducts
+);
+router.get(
+    '/list-products',
+    productsController.getproducts
+);
 
-router.post('/add-products', (req, res) => {
-    res.send("add-products");
-})
+router.post(
+    '/add-products',
+    productsController.addproducts
+);
 
-router.put('/update-products', (req, res) => {
-    res.send("update-products");
-})
+router.put(
+    '/update-products',
+    productsController.updateproducts
+);
 
-router.delete('/delete-products', (req, res) => {
-    res.send("delete-products");
-})
+router.delete(
+    '/delete-products',
+    productsController.deleteproducts
+);
 
 module.exports = router;

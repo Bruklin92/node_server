@@ -1,20 +1,25 @@
 const express = require('express');
+const { variantController } = require('../../../controller');
 const router = express.Router();
 
-router.get('/list-variants', (req, res) => {
-    res.send("list variants");
-});
+router.get(
+    '/list-variants',
+    variantController.listvariant
+);
 
-router.post('/add-variants', (req, res) => {
-    res.send("add-variants");
-});
+router.post(
+    '/add-variants',
+    variantController.addvariant
+);
 
-router.put('/update-variants', (req, res) => {
-    res.send("update variants");
-});
+router.put(
+    '/update-variants',
+    variantController.updatevariant
+);
 
-router.delete('/delete-variants', (req, res) => {
-    res.send("delete variants");
-});
+router.delete(
+    '/delete-variants',
+    variantController.deletevariant
+);
 
 module.exports = router;

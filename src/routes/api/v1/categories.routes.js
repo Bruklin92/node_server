@@ -2,21 +2,34 @@ const express = require('express');
 const { categoriesController } = require('../../../controller/index.js');
 const router = express.Router();
 
-router.get('/list-categories', (req, res) => {
-    res.send("list categories");
-});
+router.get(
+    '/list-categories', 
+    categoriesController.listCategories
+);
+
+router.get(
+    '/get-categories/:id', 
+    categoriesController.getCategory
+);
 
 router.post(
     '/add-categories',
     categoriesController.addCategories
 );
 
-router.put('/update-categories', (req, res) => {
-    res.send("update category");
-});
+router.put(
+    '/update-categories/:id',
+    categoriesController.updateCategory 
+);
 
-router.delete('/delete-categories', (req, res) => {
-    res.send("delete category");
-});
+router.delete(
+    '/delete-categories/:id',
+    categoriesController.deleteCategory
+);
+
+router.get(
+    '/active-categories/',
+    categoriesController.ActiveCategory
+);
 
 module.exports = router;

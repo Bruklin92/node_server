@@ -1,20 +1,25 @@
 const express = require('express');
+const { subCategoriesController } = require('../../../controller');
 const router = express.Router();
 
-router.get('/list-subCategories', (req, res) => {
-    res.send("list subCategories");
-});
+router.get(
+    '/list-subCategories',
+    subCategoriesController.listsubCategories
+);
 
-router.post('/add-subCategories', (req, res) => {
-    res.send("add-subCategories");
-});
+router.post(
+    '/add-subCategories', 
+    subCategoriesController.addsubCategories
+);
 
-router.put('/update-subCategories', (req, res) => {
-    res.send("update subCategories");
-});
+router.put(
+    '/update-subCategories',
+    subCategoriesController.updatesubCategories
+);
 
-router.delete('/delete-subCategories', (req, res) => {
-    res.send("delete subCategories");
-});
+router.delete(
+    '/delete-subCategories',
+    subCategoriesController.deletesubCategories
+);
 
 module.exports = router;

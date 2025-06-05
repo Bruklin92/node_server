@@ -1,20 +1,29 @@
 const express = require('express');
+const { paymentsController } = require('../../../controller');
 const router = express.Router();
 
-router.get('/list-paymentes', (req, res) => {
-    res.send("list paymentes");
-});
+router.get(
+    '/list-payments',
+    paymentsController.listpayments
+);
+router.get(
+    '/list-payments',
+    paymentsController.getpayments
+);
 
-router.post('/add-paymentes', (req, res) => {
-    res.send("add-paymentes");
-});
+router.post(
+    '/add-payments',
+    paymentsController.addpayments
+);
 
-router.put('/update-paymentes', (req, res) => {
-    res.send("update paymentes");
-});
+router.put(
+    '/update-payments',
+    paymentsController.updatepayments
+);
 
-router.delete('/delete-paymentes', (req, res) => {
-    res.send("delete paymentes");
-});
+router.delete(
+    '/delete-payments',
+    paymentsController.deletepayments
+);
 
 module.exports = router;

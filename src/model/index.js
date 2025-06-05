@@ -1,1 +1,10 @@
-module.exports.Categories = require("./categories.model");
+module.exports.Carts = require("./carts.model");
+module.exports.Category = require("./categories.model");
+module.exports.offer = require("./offeres.model");
+module.exports.order = require("./orderes.model");
+module.exports.payment = require("./paymentes.model");
+module.exports.product = require("./products.model");
+module.exports.reviwe = require("./reviewes.model")
+module.exports.subCategory = require("./subcategories.model");
+module.exports.user = require("./users.model");
+module.exports.variant = require("./variantes.model")

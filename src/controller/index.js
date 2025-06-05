@@ -1,1 +1,10 @@
-module.exports.categoriesController = require("./categories.controller")
+module.exports.categoriesController = require("./categories.controller");
+module.exports.cartsController = require("./carts.controller");     
+module.exports.offeresController = require("./offeres.controller");    
+module.exports.ordersController = require("./orders.controller");                             
+module.exports.paymentsController = require("./payments.controller");     
+module.exports.productsController = require("./products.controller");
+module.exports.reviwesController = require("./reviwes.controller");
+module.exports.subCategoriesController = require("./subcategories.controller");
+module.exports.userController = require("./user.controller");
+module.exports.variantController = require("./variant.controller")                                                                                                                                                              

@@ -1,20 +1,29 @@
 const express = require('express');
+const { ordersController } = require('../../../controller');
 const router = express.Router();
 
-router.get('/list-orderes', (req, res) => {
-    res.send("list orderes");
-});
+router.get(
+    '/list-orders',
+    ordersController.listorders
+);
+router.get(
+    '/list-orders',
+    ordersController.getorders
+);
 
-router.post('/add-orderes', (req, res) => {
-    res.send("add-orderes");
-});
+router.post(
+    '/add-orders',
+    ordersController.addorders
+);
 
-router.put('/update-orderes', (req, res) => {
-    res.send("update orderes");
-});
+router.put(
+    '/update-orders',
+    ordersController.updateorders
+);
 
-router.delete('/delete-orderes', (req, res) => {
-    res.send("delete orderes");
-});
+router.delete(
+    '/delete-orders',
+    ordersController.deleteorders
+);
 
 module.exports = router;

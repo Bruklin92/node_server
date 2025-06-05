@@ -1,10 +1,10 @@
-const { Categories } = require("../model")
+const { orders } = require("../model")
 
-const addCategories = async (req, res) => {
-    console.log("add Category", req.body);
+const addorders = async (req, res) => {
+    console.log("add orders", req.body);
     try {
-        const category = await Categories.create(req.body)
-        if (!category) {
+        const orders = await orders.create(req.body)
+        if (!orders) {
             return res.status(500).json({
                 success: false,
                 data: null,
@@ -14,7 +14,7 @@ const addCategories = async (req, res) => {
 
         return res.status(201).json({
             success: true,
-            data: category,
+            data: orders,
             message: "database created"
         })
     } catch (error) {
@@ -26,10 +26,10 @@ const addCategories = async (req, res) => {
     }
 }
 
-const listCategories = async (req, res) => {
+const listorders = async (req, res) => {
     try {
-        const categories = await Categories.find();
-        if (!categories) {
+        const orders = await orders.find();
+        if (!orders) {
             return res.status(500).json({
                 success: false,
                 data: [],
@@ -39,7 +39,7 @@ const listCategories = async (req, res) => {
 
         return res.status(201).json({
             success: true,
-            data: categories,
+            data: orders,
             message: "database fetched."
         })
     } catch (error) {
@@ -51,13 +51,13 @@ const listCategories = async (req, res) => {
     }
 }
 
-const getCategory = async (req, res) => {
+const getorders = async (req, res) => {
 
     try {
         const { id } = req.params;
 
-        const category = await Categories.findById(id);
-        if (!category) {
+        const orders = await orders.findById(id);
+        if (!orders) {
             return res.status(500).json({
                 success: false,
                 data: [],
@@ -67,7 +67,7 @@ const getCategory = async (req, res) => {
 
         return res.status(201).json({
             success: true,
-            data: category,
+            data: orders,
             message: "database fetched."
         })
     } catch (error) {
@@ -79,12 +79,12 @@ const getCategory = async (req, res) => {
     }
 }
 
-const updateCategory = async (req, res) => {
+const updateorders = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const category = await Categories.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
-        if (!category) {
+        const orders = await orders.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        if (!orders) {
             return res.status(500).json({
                 success: false,
                 data: [],
@@ -94,7 +94,7 @@ const updateCategory = async (req, res) => {
 
         return res.status(201).json({
             success: true,
-            data: category,
+            data: orders,
             message: "database updated."
         })
     } catch (error) {
@@ -106,12 +106,12 @@ const updateCategory = async (req, res) => {
     }
 }
 
-const deleteCategory = async (req, res) => {
+const deleteorders = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const category = await Categories.findByIdAndDelete(id);
-        if (!category) {
+        const orders = await orders.findByIdAndDelete(id);
+        if (!orders) {
             return res.status(500).json({
                 success: false,
                 data: [],
@@ -121,7 +121,7 @@ const deleteCategory = async (req, res) => {
 
         return res.status(201).json({
             success: true,
-            data: category,
+            data: orders,
             message: "database deleted."
         })
     } catch (error) {
@@ -131,50 +131,11 @@ const deleteCategory = async (req, res) => {
             message: "internal server erroe." + error.message
         })
     }
-}
-
-const ActiveCategory = async (req, res) => {
-    try {
-        const category = await Categories.aggregate([
-            {
-                $match: {
-                    isActive: true
-                }
-            },
-            {
-                $count: 'noofActiveusers'
-            }
-        ]);
-
-        console.log("ActiveCategories", category);
-        
-
-        if (!category) {
-            return res.status(500).json({
-                success: false,
-                data: [],
-                message: "database not deleted."
-            })
-        }
-
-        return res.status(201).json({
-            success: true,
-            data: category,
-            message: "database deleted."
-        })
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            data: null,
-            message: "internal server erroe." + error.message
-        })
-    }
-}
+  }
 module.exports = {
-    addCategories,
-    listCategories,
-    getCategory,
-    updateCategory,
-    deleteCategory,
-    ActiveCategory
+    addorders,
+    listorders,
+    getorders,
+    updateorders,
+    deleteorders
 }
