@@ -1,9 +1,9 @@
-const { user } = require("../model")
+const { User } = require("../model");
 
 const adduser = async (req, res) => {
     console.log("add user", req.body);
     try {
-        const user = await user.create(req.body)
+        const user = await User.create(req.body)
         if (!user) {
             return res.status(500).json({
                 success: false,
@@ -28,7 +28,7 @@ const adduser = async (req, res) => {
 
 const listuser = async (req, res) => {
     try {
-        const user = await user.find();
+        const user = await User.find();
         if (!user) {
             return res.status(500).json({
                 success: false,
@@ -56,7 +56,7 @@ const getuser = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const user = await user.findById(id);
+        const user = await User.findById(id);
         if (!user) {
             return res.status(500).json({
                 success: false,
@@ -83,7 +83,7 @@ const updateuser = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const user = await user.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const user = await User.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!user) {
             return res.status(500).json({
                 success: false,
@@ -110,7 +110,7 @@ const deleteuser = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const user = await user.findByIdAndDelete(id);
+        const user = await User.findByIdAndDelete(id);
         if (!user) {
             return res.status(500).json({
                 success: false,

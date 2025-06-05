@@ -33,7 +33,7 @@ const variantsSchema = new Schema(
     },
     {
         timestamps: true,
-        versionKey: true
+        versionKey: false
     }
 );
 

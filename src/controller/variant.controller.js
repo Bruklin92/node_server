@@ -1,9 +1,9 @@
-const { variant } = require("../model")
+const { Variant } = require("../model");
 
 const addvariant = async (req, res) => {
     console.log("add variant", req.body);
     try {
-        const variant = await variant.create(req.body)
+        const variant = await Variant.create(req.body)
         if (!variant) {
             return res.status(500).json({
                 success: false,
@@ -28,7 +28,7 @@ const addvariant = async (req, res) => {
 
 const listvariant = async (req, res) => {
     try {
-        const variant = await variant.find();
+        const variant = await Variant.find();
         if (!variant) {
             return res.status(500).json({
                 success: false,
@@ -56,7 +56,7 @@ const getvariant = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const variant = await variant.findById(id);
+        const variant = await Variant.findById(id);
         if (!variant) {
             return res.status(500).json({
                 success: false,
@@ -83,7 +83,7 @@ const updatevariant = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const variant = await variant.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const variant = await Variant.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!variant) {
             return res.status(500).json({
                 success: false,
@@ -110,7 +110,7 @@ const deletevariant = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const variant = await variant.findByIdAndDelete(id);
+        const variant = await Variant.findByIdAndDelete(id);
         if (!variant) {
             return res.status(500).json({
                 success: false,

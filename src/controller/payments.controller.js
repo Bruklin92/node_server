@@ -1,9 +1,9 @@
-const { payments } = require("../model")
+const { Payment } = require("../model");
 
 const addpayments = async (req, res) => {
     console.log("add payments", req.body);
     try {
-        const payments = await payments.create(req.body)
+        const payments = await Payment.create(req.body)
         if (!payments) {
             return res.status(500).json({
                 success: false,
@@ -28,7 +28,7 @@ const addpayments = async (req, res) => {
 
 const listpayments = async (req, res) => {
     try {
-        const payments = await payments.find();
+        const payments = await Payment.find();
         if (!payments) {
             return res.status(500).json({
                 success: false,
@@ -56,7 +56,7 @@ const getpayments = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const payments = await payments.findById(id);
+        const payments = await Payment.findById(id);
         if (!payments) {
             return res.status(500).json({
                 success: false,
@@ -83,7 +83,7 @@ const updatepayments = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const payments = await payments.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const payments = await Payment.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!payments) {
             return res.status(500).json({
                 success: false,
@@ -110,7 +110,7 @@ const deletepayments = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const payments = await payments.findByIdAndDelete(id);
+        const payments = await Payment.findByIdAndDelete(id);
         if (!payments) {
             return res.status(500).json({
                 success: false,

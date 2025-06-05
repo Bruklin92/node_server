@@ -14,7 +14,7 @@ const offersSchema = new Schema(
             required: true,
         },
         pid: {
-            typeL: mongoose.Types.ObjectId,
+            type: mongoose.Types.ObjectId,
             ref: "products",
             required: true,
         },
@@ -33,7 +33,7 @@ const offersSchema = new Schema(
             required: true,
             parseInt: true
         },
-       isActive: {
+        isActive: {
             type: Boolean,
             default: true
         }

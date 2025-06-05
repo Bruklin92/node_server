@@ -1,9 +1,9 @@
-const { orders } = require("../model")
+const { Order } = require("../model");
 
 const addorders = async (req, res) => {
     console.log("add orders", req.body);
     try {
-        const orders = await orders.create(req.body)
+        const orders = await Order.create(req.body)
         if (!orders) {
             return res.status(500).json({
                 success: false,
@@ -28,7 +28,7 @@ const addorders = async (req, res) => {
 
 const listorders = async (req, res) => {
     try {
-        const orders = await orders.find();
+        const orders = await Order.find();
         if (!orders) {
             return res.status(500).json({
                 success: false,
@@ -56,7 +56,7 @@ const getorders = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const orders = await orders.findById(id);
+        const orders = await Order.findById(id);
         if (!orders) {
             return res.status(500).json({
                 success: false,
@@ -83,7 +83,7 @@ const updateorders = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const orders = await orders.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const orders = await Order.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!orders) {
             return res.status(500).json({
                 success: false,
@@ -110,7 +110,7 @@ const deleteorders = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const orders = await orders.findByIdAndDelete(id);
+        const orders = await Order.findByIdAndDelete(id);
         if (!orders) {
             return res.status(500).json({
                 success: false,

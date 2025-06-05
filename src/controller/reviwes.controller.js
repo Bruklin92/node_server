@@ -1,9 +1,9 @@
-const { reviwes } = require("../model")
+const { Reviwe } = require("../model");
 
 const addreviwes = async (req, res) => {
     console.log("add reviwes", req.body);
     try {
-        const reviwes = await reviwes.create(req.body)
+        const reviwes = await Reviwe.create(req.body)
         if (!reviwes) {
             return res.status(500).json({
                 success: false,
@@ -28,7 +28,7 @@ const addreviwes = async (req, res) => {
 
 const listreviwes = async (req, res) => {
     try {
-        const reviwes = await reviwes.find();
+        const reviwes = await Reviwe.find();
         if (!reviwes) {
             return res.status(500).json({
                 success: false,
@@ -56,7 +56,7 @@ const getreviwes = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const reviwes = await reviwes.findById(id);
+        const reviwes = await Reviwe.findById(id);
         if (!reviwes) {
             return res.status(500).json({
                 success: false,
@@ -83,7 +83,7 @@ const updatereviwes = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const reviwes = await reviwes.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const reviwes = await Reviwe.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!reviwes) {
             return res.status(500).json({
                 success: false,
@@ -110,7 +110,7 @@ const deletereviwes = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const reviwes = await reviwes.findByIdAndDelete(id);
+        const reviwes = await Reviwe.findByIdAndDelete(id);
         if (!reviwes) {
             return res.status(500).json({
                 success: false,

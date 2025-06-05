@@ -1,9 +1,9 @@
-const { products } = require("../model")
+const { Product } = require("../model");
 
 const addproducts = async (req, res) => {
     console.log("add products", req.body);
     try {
-        const products = await products.create(req.body)
+        const products = await Product.create(req.body)
         if (!products) {
             return res.status(500).json({
                 success: false,
@@ -28,7 +28,7 @@ const addproducts = async (req, res) => {
 
 const listproducts = async (req, res) => {
     try {
-        const products = await products.find();
+        const products = await Product.find();
         if (!products) {
             return res.status(500).json({
                 success: false,
@@ -56,7 +56,7 @@ const getproducts = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const products = await products.findById(id);
+        const products = await Product.findById(id);
         if (!products) {
             return res.status(500).json({
                 success: false,
@@ -83,7 +83,7 @@ const updateproducts = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const products = await products.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const products = await Product.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!products) {
             return res.status(500).json({
                 success: false,
@@ -110,7 +110,7 @@ const deleteproducts = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const products = await products.findByIdAndDelete(id);
+        const products = await Product.findByIdAndDelete(id);
         if (!products) {
             return res.status(500).json({
                 success: false,

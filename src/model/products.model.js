@@ -18,7 +18,7 @@ const productsSchema = new Schema(
             trim: true,
             required: true,
             unique: true
-        }, 
+        },
         description: {
             type: String,
             trim: true,
@@ -27,15 +27,15 @@ const productsSchema = new Schema(
         },
         pro_img: {
             type: String
-        },        
-      isActive: {
+        },
+        isActive: {
             type: Boolean,
             default: true
         }
     },
     {
-      timestamps: true,
-      versionKey: false
+        timestamps: true,
+        versionKey: false
     }
 )
 

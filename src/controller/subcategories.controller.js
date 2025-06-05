@@ -1,9 +1,9 @@
-const { subCategories } = require("../model")
+const { SubCategory } = require("../model");
 
 const addsubCategories = async (req, res) => {
     console.log("add subCategories", req.body);
     try {
-        const subCategories = await subCategories.create(req.body)
+        const subCategories = await SubCategory.create(req.body)
         if (!subCategories) {
             return res.status(500).json({
                 success: false,
@@ -28,7 +28,7 @@ const addsubCategories = async (req, res) => {
 
 const listsubCategories = async (req, res) => {
     try {
-        const subCategories = await subCategories.find();
+        const subCategories = await SubCategory.find();
         if (!subCategories) {
             return res.status(500).json({
                 success: false,
@@ -56,7 +56,7 @@ const getsubCategories = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const subCategories = await subCategories.findById(id);
+        const subCategories = await SubCategory.findById(id);
         if (!subCategories) {
             return res.status(500).json({
                 success: false,
@@ -83,7 +83,7 @@ const updatesubCategories = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const subCategories = await subCategories.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const subCategories = await SubCategory.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!subCategories) {
             return res.status(500).json({
                 success: false,
@@ -110,7 +110,7 @@ const deletesubCategories = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const subCategories = await subCategories.findByIdAndDelete(id);
+        const subCategories = await SubCategory.findByIdAndDelete(id);
         if (!subCategories) {
             return res.status(500).json({
                 success: false,
