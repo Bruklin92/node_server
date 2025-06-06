@@ -18,7 +18,7 @@ router.use("/subCategories", subCategoriesRoutes);
 router.use("/variants", variantsRoutes);
 router.use("/carts", cartRoutes);
 router.use("/offeres", offeresRoutes);
-router.use("/userdetailes", UserDetailesRoutes);
+router.use("/user", UserDetailesRoutes);
 router.use("/orderes", orderesRoutes);
 router.use("/paymentes", paymentesRoutes); 
 router.use("/reviewes", reviewesRoutes);

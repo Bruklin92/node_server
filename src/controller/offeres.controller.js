@@ -1,9 +1,9 @@
-const { Offeres } = require("../model")
+const { Offer } = require("../model");
 
 const addOfferes = async (req, res) => {
     console.log("add offeres", req.body);
     try {
-        const offeres = await Offeres.create(req.body)
+        const offeres = await Offer.create(req.body)
         if (!offeres) {
             return res.status(500).json({
                 success: false,
@@ -28,7 +28,7 @@ const addOfferes = async (req, res) => {
 
 const listOfferes = async (req, res) => {
     try {
-        const Offeres = await Offeres.find();
+        const Offeres = await Offer.find();
         if (!Offeres) {
             return res.status(500).json({
                 success: false,
@@ -56,7 +56,7 @@ const getofferes = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const offeres = await Offeres.findById(id);
+        const offeres = await Offer.findById(id);
         if (!offeres) {
             return res.status(500).json({
                 success: false,
@@ -83,7 +83,7 @@ const updateofferes = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const offeres = await Offeres.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
+        const offeres = await Offer.findByIdAndUpdate(id, req.body, { new: true, runValidators: true });
         if (!offeres) {
             return res.status(500).json({
                 success: false,
@@ -110,7 +110,7 @@ const deleteofferes = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const offeres = await Offeres.findByIdAndDelete(id);
+        const offeres = await Offer.findByIdAndDelete(id);
         if (!offeres) {
             return res.status(500).json({
                 success: false,

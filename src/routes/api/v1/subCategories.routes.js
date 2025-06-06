@@ -7,19 +7,33 @@ router.get(
     subCategoriesController.listsubCategories
 );
 
+router.get(
+    '/get-subCategories/:id',
+    subCategoriesController.getsubCategories
+);
+
 router.post(
     '/add-subCategories', 
     subCategoriesController.addsubCategories
 );
 
 router.put(
-    '/update-subCategories',
+    '/update-subCategories/:id',
     subCategoriesController.updatesubCategories
 );
 
 router.delete(
-    '/delete-subCategories',
+    '/delete-subCategories/:id',
     subCategoriesController.deletesubCategories
 );
 
+router.get(
+    '/parant-subCategories/:id',
+    subCategoriesController.parantCategory
+);
+
+router.get(
+    '/active-subCategories',
+    subCategoriesController.ActivesubCategories
+);
 module.exports = router;

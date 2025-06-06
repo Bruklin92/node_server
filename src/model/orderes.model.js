@@ -28,7 +28,7 @@ const ordersSchema = new Schema(
             required: true,
             parseInt: true
         },
-        dicount: {
+        discount: {
             type: Number,
             required: true,
             parseInt: true

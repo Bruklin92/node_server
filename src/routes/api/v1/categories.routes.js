@@ -32,4 +32,24 @@ router.get(
     categoriesController.ActiveCategory
 );
 
+router.get(
+    '/totalProduct-categories/',
+    categoriesController.totalProduct
+);
+
+router.get(
+    '/inactive-categories/',
+    categoriesController.InActiveCategory
+);
+
+router.get(
+    '/count-categories/',
+    categoriesController.countSubCat
+);
+
+router.get(
+    '/productCount-categories/',
+    categoriesController.productCount
+);
+
 module.exports = router;

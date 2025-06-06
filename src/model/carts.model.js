@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const variantSchema = new Schema (
     {
-        item: {
+        v_id: {
             type: mongoose.Types.ObjectId,
             ref: "variant",
             required: true,

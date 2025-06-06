@@ -7,18 +7,23 @@ router.get(
     reviwesController.listreviwes
 );
 
+router.get(
+    '/get-reviewes/:id',
+    reviwesController.getreviwes
+);
+
 router.post(
     '/add-reviewes',
     reviwesController.addreviwes
 );
 
 router.put(
-    '/update-reviewes',
+    '/update-reviewes/:id',
     reviwesController.updatereviwes
 );
 
 router.delete(
-    '/delete-reviewes',
+    '/delete-reviewes/:id',
     reviwesController.deletereviwes
  );
 

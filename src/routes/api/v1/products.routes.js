@@ -7,7 +7,7 @@ router.get(
     productsController.listproducts
 );
 router.get(
-    '/list-products',
+    '/get-products/:id',
     productsController.getproducts
 );
 
@@ -17,12 +17,12 @@ router.post(
 );
 
 router.put(
-    '/update-products',
+    '/update-products/:id',
     productsController.updateproducts
 );
 
 router.delete(
-    '/delete-products',
+    '/delete-products/:id',
     productsController.deleteproducts
 );
 

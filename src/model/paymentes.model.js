@@ -3,6 +3,11 @@ const { Schema } = mongoose;
 
 const paymentsSchema = new Schema(
     {
+        order_id : {
+            type : mongoose.Types.ObjectId,
+            ref : "orders",
+            required : true
+        },
         method: {
             type: String,
             required: true,

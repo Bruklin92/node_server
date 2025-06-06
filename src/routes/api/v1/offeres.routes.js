@@ -7,7 +7,7 @@ router.get(
     offeresController.listOfferes
 );
 router.get(
-    '/list-offeres',
+    '/get-offeres/:id',
     offeresController.getofferes
 );
 
@@ -17,12 +17,12 @@ router.post(
 );
 
 router.put(
-    '/update-offeres',
+    '/update-offeres/:id',
     offeresController.updateofferes
 );
 
 router.delete(
-    '/delete-offeres',
+    '/delete-offeres/:id',
     offeresController.deleteofferes
 );
 

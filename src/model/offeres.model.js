@@ -25,7 +25,7 @@ const offersSchema = new Schema(
             unique: true
         },
         expire_date: {
-            type: Date,
+            type: String,
             required: true,
         },
         percetages: {

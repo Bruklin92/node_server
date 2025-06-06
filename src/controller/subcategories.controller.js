@@ -1,5 +1,6 @@
-const { SubCategory } = require("../model");
 
+const { SubCategory } = require("../model");
+const mongoose = require("mongoose");
 const addsubCategories = async (req, res) => {
     console.log("add subCategories", req.body);
     try {
@@ -131,11 +132,94 @@ const deletesubCategories = async (req, res) => {
             message: "internal server erroe." + error.message
         })
     }
-  }
+}
+
+const ActivesubCategories = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const subCategories = await SubCategory.aggregate([
+            {
+                $match: {
+                    isActive: true
+                }
+            },
+            {
+                $count: 'noofActiveusers'
+            }
+        ]);
+        if (!subCategories) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: subCategories,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
+
+const parantCategory = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        console.log("iddddd", id);
+
+
+        const subCategories = await SubCategory.aggregate([
+            {
+                $match: {
+                    _id: new mongoose.Types.ObjectId(id)
+                }
+            },
+            {
+                $lookup: {
+                    from: "categories",
+                    localField: "subcategories_id",
+                    foreignField: "categories_id",
+                    as: "category"
+                }
+            },
+        ]);
+        if (!subCategories) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: subCategories,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
+
 module.exports = {
     addsubCategories,
     listsubCategories,
     getsubCategories,
     updatesubCategories,
-    deletesubCategories
-}
+    deletesubCategories,
+    parantCategory,
+    ActivesubCategories
+}   

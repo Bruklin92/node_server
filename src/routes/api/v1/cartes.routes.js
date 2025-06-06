@@ -7,7 +7,7 @@ router.get(
     cartsController.listCarts
 );
 router.get(
-    '/list-cart',
+    '/get-cart/:id',
     cartsController.getcarts
 );
 
@@ -17,12 +17,12 @@ router.post(
 );
 
 router.put(
-    '/update-cart',
+    '/update-cart/:id',
     cartsController.updatecarts
 );
 
 router.delete(
-    '/delete-cart',
+    '/delete-cart/:id',
     cartsController.deletecarts
 );
 

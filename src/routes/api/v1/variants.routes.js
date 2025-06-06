@@ -7,18 +7,23 @@ router.get(
     variantController.listvariant
 );
 
+router.get(
+    '/get-variants/:id',
+    variantController.getvariant
+);
+
 router.post(
     '/add-variants',
     variantController.addvariant
 );
 
 router.put(
-    '/update-variants',
+    '/update-variants/:id',
     variantController.updatevariant
 );
 
 router.delete(
-    '/delete-variants',
+    '/delete-variants/:id',
     variantController.deletevariant
 );
 

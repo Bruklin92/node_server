@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const reviewsSchema = new Schema (
     {
-        products_id: {
+        pid: {
             type: mongoose.Types.ObjectId,
             ref: "products",
             required: true

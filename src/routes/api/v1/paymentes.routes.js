@@ -7,7 +7,7 @@ router.get(
     paymentsController.listpayments
 );
 router.get(
-    '/list-payments',
+    '/get-payments/:id',
     paymentsController.getpayments
 );
 
@@ -17,12 +17,12 @@ router.post(
 );
 
 router.put(
-    '/update-payments',
+    '/update-payments/:id',
     paymentsController.updatepayments
 );
 
 router.delete(
-    '/delete-payments',
+    '/delete-payments/:id',
     paymentsController.deletepayments
 );
 
