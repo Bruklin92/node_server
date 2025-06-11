@@ -26,4 +26,8 @@ router.delete(
     paymentsController.deletepayments
 );
 
+router.get(
+    '/calculateOrder-payments',
+    paymentsController.calculateOrder
+);
 module.exports = router;

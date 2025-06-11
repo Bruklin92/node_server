@@ -131,11 +131,62 @@ const deleteuser = async (req, res) => {
             message: "internal server erroe." + error.message
         })
     }
-  }
+}
+
+const SearchUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const user = await User.aggregate([
+            {
+                $match: {
+                    name: /^[ a-zA-Z]+/,
+                    email:
+                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    adress: /^[ a-zA-Z]+/,
+                    mo_number:
+                        /^(([1-9]*)|(([1-9]*).([0-9]*)))$/
+                }
+            },
+            {
+                $match: {
+                    $and: [
+                        {
+                            name: { $regex: "$name" },
+                            email: { $regex: "$email" },
+                            adress: { $regex: "$adress" },
+                            mo_number: { $regex: "$mo_number" }
+                        }
+                    ]
+                }
+            }
+        ]);
+        if (!user) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: user,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
 module.exports = {
     adduser,
     listuser,
     getuser,
     updateuser,
-    deleteuser
+    deleteuser,
+    SearchUser
 }

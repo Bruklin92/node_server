@@ -131,11 +131,48 @@ const deletevariant = async (req, res) => {
             message: "internal server erroe." + error.message
         })
     }
-  }
+}
+
+const countVariant = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const variant = await Variant.aggregate([
+            {
+                $group: {
+                    _id: "$pid",
+                    count: {
+                        $sum: 1
+                    }
+                }
+            }
+        ]);
+        if (!variant) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: variant,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
 module.exports = {
     addvariant,
     listvariant,
     getvariant,
     updatevariant,
-    deletevariant
+    deletevariant,
+    countVariant
 }

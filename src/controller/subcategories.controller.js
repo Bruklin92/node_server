@@ -214,6 +214,186 @@ const parantCategory = async (req, res) => {
     }
 }
 
+const totalProducts = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        console.log("iddddd", id);
+
+
+        const subCategories = await SubCategory.aggregate([
+            {
+                $group: {
+                    _id: "$_id",
+                    subCategory: {
+                        $sum: 1
+                    }
+                }
+            },
+            {
+                $lookup: {
+                    from: "products",
+                    localField: "_id",
+                    foreignField: "subcategories_id",
+                    as: "product"
+                }
+            }
+        ]);
+        if (!subCategories) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: subCategories,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
+
+const inActiveSubCategory = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        console.log("iddddd", id);
+
+
+        const subCategories = await SubCategory.aggregate([
+            {
+                $group: {
+                    _id: "$isActive",
+                    Active: {
+                        $sum: 1
+                    }
+                }
+            }
+        ]);
+        if (!subCategories) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: subCategories,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
+
+const productCount = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        console.log("iddddd", id);
+
+
+        const subCategories = await SubCategory.aggregate([
+            {
+                $lookup: {
+                    from: "products",
+                    localField: "_id",
+                    foreignField: "subcategories_id",
+                    as: "products"
+                }
+            },
+            {
+                $unwind: "$products"
+            },
+            {
+                $group: {
+                    _id: "$_id",
+                    product: {
+                        $sum: 1
+                    }
+                }
+            }
+        ]);
+        if (!subCategories) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: subCategories,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
+
+const InactiveProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        console.log("iddddd", id);
+
+
+        const subCategories = await SubCategory.aggregate([
+            {
+                $lookup: {
+                    from: "products",
+                    localField: "_id",
+                    foreignField: "subcategories_id",
+                    as: "product"
+                }
+            },
+            {
+                $match: {
+                    product: { $eq: [] }
+                }
+            }
+        ]);
+        if (!subCategories) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: subCategories,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
+
 module.exports = {
     addsubCategories,
     listsubCategories,
@@ -221,5 +401,9 @@ module.exports = {
     updatesubCategories,
     deletesubCategories,
     parantCategory,
-    ActivesubCategories
-}   
+    ActivesubCategories,
+    totalProducts,
+    inActiveSubCategory,
+    productCount,
+    InactiveProduct
+}

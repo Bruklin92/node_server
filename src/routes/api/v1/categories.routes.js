@@ -43,8 +43,13 @@ router.get(
 );
 
 router.get(
-    '/count-categories/',
+    '/count-categories',
     categoriesController.countSubCat
+);
+
+router.get(
+    '/speCategory-categories/:id',
+    categoriesController.speCategory
 );
 
 router.get(

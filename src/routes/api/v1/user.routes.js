@@ -27,4 +27,9 @@ router.delete(
     userController.deleteuser
 );
 
+router.get(
+    '/SearchUser-User',
+    userController.SearchUser
+);
+
 module.exports = router;

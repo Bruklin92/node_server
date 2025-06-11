@@ -131,11 +131,65 @@ const deletepayments = async (req, res) => {
             message: "internal server erroe." + error.message
         })
     }
-  }
+}
+
+const calculateOrder = async (req, res) => {
+    try {
+        const payments = await Payment.aggregate([
+            {
+                $group: {
+                    _id: "$order_id",
+                    order: {
+                        $sum: 1
+                    },
+                    method: { $first: "$method" }
+                }
+            },
+            {
+                $lookup: {
+                    from: "orders",
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "order"
+                }
+            },
+            {
+                $unwind: "$order"
+            },
+            {
+                $project: {
+                    "order.item.qty": 1,
+                    "order.total_amt": 1,
+                    "order.status": 1
+                }
+            }
+        ]);
+        if (!payments) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: payments,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
 module.exports = {
     addpayments,
     listpayments,
     getpayments,
     updatepayments,
-    deletepayments
+    deletepayments,
+    calculateOrder
 }

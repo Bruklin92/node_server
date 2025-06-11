@@ -27,4 +27,9 @@ router.delete(
     variantController.deletevariant
 );
 
+router.get(
+    '/countVariant-variants',
+    variantController.countVariant
+);
+
 module.exports = router;

@@ -26,4 +26,19 @@ router.delete(
     productsController.deleteproducts
 );
 
+router.get(
+    '/novariants-products',
+    productsController.NoVariant
+);
+
+router.get(
+    '/ListReviwe-products',
+    productsController.ListReviwe
+);
+
+router.get(
+    '/name-products/?name',
+    productsController.NameSearch
+);
+
 module.exports = router;

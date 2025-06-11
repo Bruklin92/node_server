@@ -11,7 +11,7 @@ const categoriesSchema = new Schema(
             unique: true,
         },
         description: {
-            type: String,
+            type: String,   
             required: true,
             trim: true
         },

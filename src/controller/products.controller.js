@@ -131,11 +131,123 @@ const deleteproducts = async (req, res) => {
             message: "internal server erroe." + error.message
         })
     }
-  }
+}
+
+const NoVariant = async (req, res) => {
+    console.log("add products", req.body);
+    try {
+        const products = await Product.aggregate([
+            {
+                $lookup: {
+                    from: "varients",
+                    localField: "_id",
+                    foreignField: "pid",
+                    as: "variants"
+                }
+            },
+            {
+                $match: {
+                    variants: { $eq: [] }
+                }
+            }
+        ])
+        if (!products) {
+            return res.status(500).json({
+                success: false,
+                data: null,
+                message: "database not created"
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: products,
+            message: "database created"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe" + error.message
+        })
+    }
+}
+
+const ListReviwe = async (req, res) => {
+    try {
+        const products = await Product.aggregate([
+            {
+                $lookup: {
+                    from: "reviews",
+                    localField: "_id",
+                    foreignField: "pid",
+                    as: "reviews"
+                }
+            },
+            {
+                $unwind: "$reviews"
+            }
+        ])
+        if (!products) {
+            return res.status(500).json({
+                success: false,
+                data: null,
+                message: "database not created"
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: products,
+            message: "database created"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe" + error.message
+        })
+    }
+}
+
+const NameSearch = async (req, res) => {
+    try {
+        const products = await Product.aggregate([
+            {
+                $match: {
+                    name: /^[ a-zA-Z]+/
+                }
+            }
+        ])
+        if (!products) {
+            return res.status(500).json({
+                success: false,
+                data: null,
+                message: "database not created"
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: products,
+            message: "database created"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe" + error.message
+        })
+    }
+}
+
 module.exports = {
     addproducts,
     listproducts,
     getproducts,
     updateproducts,
-    deleteproducts
+    deleteproducts,
+    NoVariant,
+    ListReviwe,
+    NameSearch
 }

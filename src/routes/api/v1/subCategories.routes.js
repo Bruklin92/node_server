@@ -36,4 +36,26 @@ router.get(
     '/active-subCategories',
     subCategoriesController.ActivesubCategories
 );
+
+router.get(
+    '/totalProducts-subCategories',
+    subCategoriesController.totalProducts
+);
+
+router.get(
+    '/InActive-subCategories',
+    subCategoriesController.inActiveSubCategory
+);
+
+router.get(
+    '/productCount-subCategories',
+    subCategoriesController.productCount
+);
+
+router.get(
+    '/InactiveProduct-subCategories',
+    subCategoriesController.InactiveProduct
+);
+
+
 module.exports = router;

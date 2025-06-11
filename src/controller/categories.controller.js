@@ -305,6 +305,54 @@ const countSubCat = async (req, res) => {
     }
 }
 
+const speCategory = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        console.log("iddddd", id);
+
+
+        const subCategories = await Category.aggregate([
+            {
+                $group: {
+                    _id: "$_id",
+                    subCategory: {
+                        $sum: 1
+                    }
+                }
+            },
+            {
+                $lookup: {
+                    from: "products",
+                    localField: "_id",
+                    foreignField: "categories_id",
+                    as: "product"
+                }
+            }
+        ]);
+        if (!subCategories) {
+            return res.status(500).json({
+                success: false,
+                data: [],
+                message: "database not deleted."
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: subCategories,
+            message: "database deleted."
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe." + error.message
+        })
+    }
+}
+
+
 const productCount = async (req, res) => {
     try {
         const category = await Category.aggregate(
@@ -371,5 +419,6 @@ module.exports = {
     totalProduct,
     InActiveCategory,
     countSubCat,
+    speCategory,
     productCount
 }
