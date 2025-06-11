@@ -352,7 +352,6 @@ const speCategory = async (req, res) => {
     }
 }
 
-
 const productCount = async (req, res) => {
     try {
         const category = await Category.aggregate(
