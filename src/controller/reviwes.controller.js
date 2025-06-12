@@ -136,6 +136,6 @@ module.exports = {
     addreviwes,
     listreviwes,
     getreviwes,
-    updatereviwes,
+    updatereviwes,  
     deletereviwes
 }
