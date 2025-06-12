@@ -32,4 +32,8 @@ router.get(
     variantController.countVariant
 );
 
+router.get(
+    '/listproduct-variants/:id',
+    variantController.listvariantsProduct
+);
 module.exports = router;

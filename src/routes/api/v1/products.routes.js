@@ -37,8 +37,49 @@ router.get(
 );
 
 router.get(
-    '/name-products/?name',
+    '/search-products',
     productsController.NameSearch
 );
+
+router.get(
+    '/listCategory-products/:id',
+    productsController.CategoryProduct
+);
+
+router.get(
+    '/listSubCategory-products/:id',
+    productsController.SubCategoryProduct
+);
+
+// router.get(
+//     '/listproductvarient-products/:id',
+//     productsController.productvarient
+// );
+
+router.get(
+    '/listRatting-products',
+    productsController.rattingProducts
+);
+
+router.get(
+    '/outofStock-products',
+    productsController.outofStock
+);
+
+router.get(
+    '/countCat-products',
+    productsController.CountCategory
+);
+
+router.get(
+    '/CountReview-products',
+    productsController.CountReview
+);
+
+router.get(
+    '/review-rating-products',
+    productsController.ReviewGte
+);
+
 
 module.exports = router;

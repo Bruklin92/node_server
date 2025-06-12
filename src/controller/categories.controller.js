@@ -408,6 +408,7 @@ const productCount = async (req, res) => {
         })
     }
 }
+
 module.exports = {
     addCategories,
     listCategories,

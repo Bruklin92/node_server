@@ -168,11 +168,54 @@ const countVariant = async (req, res) => {
         })
     }
 }
+
+const listvariantsProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        console.log("iddddd", id);
+
+
+        const variant = await Variant.aggregate([
+            {
+                $lookup: {
+                    from: "products",
+                    localField: "pid",
+                    foreignField: "_id",
+                    as: "product"
+                }
+            },
+            {
+                $unwind: "$product"
+            }
+        ]);
+        if (!variant) {
+            return res.status(500).json({
+                success: false,
+                data: null,
+                message: "database not created"
+            })
+        }
+
+        return res.status(201).json({
+            success: true,
+            data: variant,
+            message: "database created"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            data: null,
+            message: "internal server erroe" + error.message
+        })
+    }
+}
 module.exports = {
     addvariant,
     listvariant,
     getvariant,
     updatevariant,
     deletevariant,
-    countVariant
+    countVariant,
+    listvariantsProduct
 }
