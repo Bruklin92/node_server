@@ -1,0 +1,8 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+
+const productSlice = createSlice({
+    name: "product",
+})
+
+export default productSlice.reducer

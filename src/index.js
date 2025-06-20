@@ -1,7 +1,14 @@
 require('dotenv').config()
-
+var cors = require('cors')
 const express = require('express');
 const app = express();
+
+
+
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
+
 app.use(express.json());
 
 const router = require('./routes/api/v1/index');
